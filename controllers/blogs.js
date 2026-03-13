@@ -10,6 +10,15 @@ blogsRouter.get('/', (request, response) => {
     })
 })
 
+blogsRouter.get('/:id', async (request, response) => {
+  const blog = await Blog.findById(request.params.id)
+  if (blog) {
+    response.json(blog)
+  } else {
+    response.status(404).end()
+  }
+})
+
 blogsRouter.post('/', userExtractor, async (request, response) => {
   const user = request.user
   const blog = new Blog(request.body)
@@ -47,13 +56,18 @@ blogsRouter.delete('/:id', userExtractor, async (request, response) => {
   response.status(204).end()
 })
 
-blogsRouter.put('/:id', async (request, response) => {
+blogsRouter.put('/:id', userExtractor, async (request, response) => {
   const { title, author, url, likes } = request.body
+  const user = request.user
 
   const blog = await Blog.findById(request.params.id)
 
   if (!blog) {
     return response.status(404).end()
+  }
+
+  if (user.id.toString() !== blog.user.toString()) {
+    return response.status(403).json({ error: 'user not authorized' })
   }
 
   blog.title = title

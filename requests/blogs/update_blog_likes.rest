@@ -1,0 +1,11 @@
+PUT http://localhost:3001/api/blogs/69a8fbb5512f3b402445d963
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjY5OWEzZTI3NmY5M2Q2ODQ1OGExNmVlZCIsImlhdCI6MTc3MTcxODk2MH0.1IlOHmvRJRNPXcuYT87Pyb1miECtx3LcKdntYjX3DmI
+
+{
+  "title": "test 6",
+    "author": "test author 6",
+    "url": "http://www.test6.com",
+    "likes": 100,
+    "id": "69a8fbb5512f3b402445d963"
+}
